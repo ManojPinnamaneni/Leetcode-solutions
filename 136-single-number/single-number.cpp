@@ -1,14 +1,8 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int n=nums.size();
-        if(n==1) return nums[0];
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<n-2;i=i+2){
-            if(nums[i]!=nums[i+1]){
-                return nums[i];
-            }
-        }
-        return nums.back();
+        int xor_value=0;
+        for(int i=0;i<nums.size();i++)xor_value^=nums[i];
+        return xor_value;
     }
 };
