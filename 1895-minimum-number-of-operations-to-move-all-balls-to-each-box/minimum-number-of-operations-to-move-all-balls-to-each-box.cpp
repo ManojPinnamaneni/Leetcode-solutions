@@ -1,19 +1,25 @@
 class Solution {
 public:
     vector<int> minOperations(string boxes) {
-        vector<int> ans;
-        for(int i=0;i<boxes.size();i++){
-            int count=0;
-            for(int j=0;j<boxes.size();j++){
-                if(i==j){
-                    continue;
-                }
-                else if(boxes[j]=='1'){
-                    count+=abs(i-j);
-                }
+        int n = boxes.size();
+        vector<int> answer(n, 0);
+        int count = 0, steps = 0;
+        for (int i = 0; i < n; ++i) {
+            answer[i] += steps;
+            if (boxes[i] == '1') {
+                count++;
             }
-            ans.push_back(count);
+            steps += count;
         }
-        return ans;
+        count = 0;
+        steps = 0;
+        for (int i = n - 1; i >= 0; --i) {
+            answer[i] += steps;
+            if (boxes[i] == '1') {
+                count++;
+            }
+            steps += count;
+        }
+        return answer;
     }
 };
